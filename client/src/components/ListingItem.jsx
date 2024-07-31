@@ -1,9 +1,24 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { MdLocationOn } from "react-icons/md";
+import PropTypes from "prop-types";
 
-const ListingItem = ({ listing }) => {
+ListingItem.propTypes = {
+  listing: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
+    name: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    offer: PropTypes.bool.isRequired,
+    discountPrice: PropTypes.number,
+    regularPrice: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    bathrooms: PropTypes.number.isRequired,
+  }).isRequired,
+};
+
+export default function ListingItem({ listing }) {
   return (
     <div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px]">
       <Link to={`/listing/${listing._id}`}>
@@ -51,22 +66,4 @@ const ListingItem = ({ listing }) => {
       </Link>
     </div>
   );
-};
-
-ListingItem.propTypes = {
-  listing: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
-    name: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    offer: PropTypes.bool.isRequired,
-    discountPrice: PropTypes.number,
-    regularPrice: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    bathrooms: PropTypes.number.isRequired,
-  }).isRequired,
-};
-
-export default ListingItem;
+}
